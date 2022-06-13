@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Form</title>
+    <link rel="stylesheet" href="{{url_for('styles', path = '/form_style.css')}}">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="title"> IBM Company</div>
+        <div class="content">
+            <!-- <form method="post"> -->
+            <form action="home" enctype="multipart/form-data" method="post" autocomplete="off">
+                <div class="general">
+                    <div class="input-box">
+                        <span class="details"> Campaign </span>
+                        <input type="number" name="campaign" placeholder="Example: 202001"/>
+                    </div>
+                    <div class="input-box">
+                        <span class="details"> Country </span>
+                        <input type="text" name="country" placeholder="Example: Peru"/>
+                    </div>
+                    <div class="input-box">
+                        <span class="details"> Page - Range </span>
+                        <input type="text" name="page_range" placeholder="Example: 20-90"/>
+                    </div>
+                </div>
+                <div class="quality">
+                    <span class="quality-title"> Quality  </span> <br>
+                    <input type="radio"class="star" name="type_name" value="Star">
+                    <label for="Star" >Star</label><br>
+                    <input type="radio" class ="star" name="type_name" value="No Star">
+                    <label for="No Star">No Star</label><br><br>
+                </div>
+                <div class="display_text">
+                    <p> Result: {{ result }} </p> <br>
+                </div>
+                <div class="button">
+                    <input type="file" id="file" name="file">
+                    <input type="submit" value="Subir">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>
