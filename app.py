@@ -10,6 +10,7 @@ import re
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi import Response
 import xlsxwriter
+from extract_pages import pages_to
 
 app = FastAPI()
 templates = Jinja2Templates(directory='frontend/templates')
@@ -37,22 +38,7 @@ def post_home(
     
     test_data = pdfplumber.open(file.file)
     # extract pages
-    pag_0 = test_data.pages[0]
-    # extraxt text
-    test_data = pag_0.extract_text()
-    # split by \n
-    data_extract = pag_0.extract_text().splitlines()
-    # get info from text
-    data_to_exp = [] 
-    for data in data_extract:
-       
-        if re.search(r'[a-z]+',data, re.I):
-            data_re = re.search(r'[a-z]+',data, re.I).group(0)
-            data_to_exp.append(data_re)
-    
-    # convert to pandas series
-    df = pd.Series(data_to_exp)
-    df= df.iloc[0:5].copy()
+    df = pages_to(test_data)
     # create io file
     output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
